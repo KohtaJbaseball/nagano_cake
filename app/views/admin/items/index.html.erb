@@ -1,0 +1,21 @@
+<%= render 'admin/link' %>
+
+<h2>商品一覧</h2>
+<% @items.each do |item| %>
+  <table>
+    <tr>
+      <th>商品ID</th>
+      <th>商品名</th>
+      <th>税抜価格</th>
+      <th>ジャンル</th>
+      <th>ステータス</th>
+    </tr>
+    <tr>
+      <td><%= item.id %></td>
+      <td><%= link_to item.name, admin_item_path(item.id) %></td>
+      <td><%= item.with_tax_price %></td>
+      <td><%= item.genre.name %></td>
+      <td></td>
+    </tr>
+  </table>
+<% end %>
