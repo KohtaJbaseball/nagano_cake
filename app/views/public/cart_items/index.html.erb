@@ -1,0 +1,57 @@
+<h2>ショッピングカート</h2>
+
+<%= link_to destroy_all_cart_item_path, method: :delete do %>
+  <button class="btn btn-default">カートを空にする</button>
+<% end %>
+
+  <table>
+    <thead>
+      <tr>
+        <th>商品名</th>
+        <th>単価(税込)</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th></th>
+      </tr>
+    </thead>
+
+<% @cart_items.each do |cart_item| %>
+    <tbody>
+      <tr>
+        <td>
+          <% if cart_item.item.image.attached? %>
+            <%= image_tag cart_item.item.image, size: "55x50" %>
+          <% else %>
+            <%= image_tag 'no_image', size: "55x50" %>
+          <% end %>
+          <%= cart_item.item.name %>
+        </td>
+        <td><%= cart_item.item.with_tax_price %></td>
+        <td>
+          <%= f.select :amount, [1,2,3,4,5,6,7,8,9,10] %>
+          <%= link_to update_cart_item_path(cart_item.id), method: :patch do %>
+            <button class="btn btn-default">変更</button>
+          <% end %>
+        </td>
+        <td><%= cart_item.subtotal %></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+<% end %>
+
+ <table>
+    <tr>
+      <th>合計金額</th>
+      <td><%= @total %></td>
+    </tr>
+  </table>
+
+<%= link_to root_path do %>
+  <button class="btn btn-default">買い物を続ける</button>
+<% end %>
+
+
+
+

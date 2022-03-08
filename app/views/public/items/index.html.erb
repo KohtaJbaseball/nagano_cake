@@ -1,0 +1,19 @@
+<h2>商品一覧</h2>
+
+<% @items.each do |item| %>
+
+<div>
+  <%= link_to item_path(item.id) do %>
+    <% if item.image.attached? %>
+      <%= image_tag item.image, size: "150x100" %>
+    <% else %>
+      <%= image_tag 'no_image', size: "150x100" %>
+    <% end %>
+  <% end %><br>
+
+  <%= item.name %><br>
+
+  ¥<%= item.price %>
+</div>
+
+<% end %>

@@ -1,6 +1,6 @@
 <%= render 'admin/link' %>
 
-<h2><%= @customer.last_name.first_name %>さんの会員情報編集</h2>
+<h2><%= @customer.first_name.last_name %>さんの会員情報編集</h2>
 
 <%= form_with model: @customer, url: admin_customer_path(@customer.id), method: :patch do |f| %>
 
