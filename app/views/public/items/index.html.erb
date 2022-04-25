@@ -1,19 +1,23 @@
-<h2>商品一覧</h2>
+<%= render 'public/public_link' %>
 
-<% @items.each do |item| %>
+<h2 class="col-4 py-5 px-5 text-center">
+  商品一覧(全<%= @items_count %>件)
+</h2>
 
-<div>
-  <%= link_to item_path(item.id) do %>
-    <% if item.image.attached? %>
-      <%= image_tag item.image, size: "150x100" %>
-    <% else %>
-      <%= image_tag 'no_image', size: "150x100" %>
+<div class="container">
+  <div class="row justify-content-center">
+    <% @items.each do |item| %>
+      <div class="col-2">
+        <%= link_to item_path(item.id) do %>
+          <% if item.image.attached? %>
+            <%= image_tag item.image, size: "200x150" %>
+          <% else %>
+            <%= image_tag 'no_image', size: "200x150" %>
+          <% end %>
+        <% end %><br>
+        <%= item.name %><br>
+        ¥<%= item.price.to_s(:delimited)%>
+      </div>
     <% end %>
-  <% end %><br>
-
-  <%= item.name %><br>
-
-  ¥<%= item.price %>
+  </div>
 </div>
-
-<% end %>

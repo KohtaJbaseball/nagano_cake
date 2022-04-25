@@ -1,42 +1,32 @@
-<header>
-  <ul>
-    <li>
-      <%= link_to "About", about_path %>
-    </li>
-    <li>
-      <%= link_to "商品一覧" %>
-    </li>
-    <li>
-      <%= link_to "新規登録", new_customer_registration_path %>
-    </li>
-    <li>
-      <%= link_to "ログイン", new_customer_session_path %>
-    </li>
-  </ul>
-</header>
+<%= render 'public/public_link' %>
 
+<div class="container">
+  <div class="row justify-content-center">
+    <p class="col-4 pt-5 fs-5">
+      ようこそながのCAKEへ！<br>
+      このサイトは、ケーキ販売のECサイトになります。<br>
+      会員でない方も商品の閲覧はできますが、<br>
+      購入には会員登録が必要になります。
+    </p>
+  </div>
+</div>
 
+<h2 class="col-4 py-5 px-5 text-center">新着商品</h2>
 
-<p>
-  ようこそながのCAKEへ！
-  このサイトは、ケーキ販売のECサイトになります。<br>
-  会員でない方も商品の閲覧はできますが、<br>
-  購入には会員登録が必要になります。
-</p>
-
-<h2>新着商品</h2>
-<% @items.each do |item| %>
-  <table>
-    <tr>
-      <td>
-        <% if item.image.attached? %>
-          <%= image_tag item.image, size: "100x100" %>
-        <% else %>
-          <%= image_tag 'no_image', size: "100x100" %>
+<div class="container">
+  <div class="row justify-content-center">
+    <% @items.each do |item| %>
+      <div class="col-2">
+        <%= link_to item_path(item.id) do %>
+          <% if item.image.attached? %>
+            <%= image_tag item.image, size: "150x100" %>
+          <% else %>
+            <%= image_tag 'no_image', size: "150x100" %>
+          <% end %><br>
+          <%= item.name %><br>
+          ¥<%= item.price %>
         <% end %>
-      </td>
-      <th><%= item.name %></th>
-      <th><%= item.price %></th>
-    </tr>
-  </table>
-<% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

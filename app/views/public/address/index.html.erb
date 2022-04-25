@@ -1,27 +1,32 @@
-<h2>配送先登録/一覧</h2>
+<%= render 'public/public_link' %>
 
-<%= form_with model: @address, url: '/address', method: :post do |f| %>
+<h2 class="col-4 py-5 px-5">配送先登録/一覧</h2>
 
-  <table>
-    <tr>
-      <td>郵便番号(ハイフンなし)</td>
-      <td><%= f.text_field :postal_code %></td>
-    </tr>
-    <tr>
-      <td>住所</td>
-      <td><%= f.text_field :address %></td>
-    </tr>
-    <tr>
-      <td>宛名</td>
-      <td><%= f.text_field :name %></td>
-      <td><%= f.submit '新規登録' %></td>
-    </tr>
-  </table>
+<%= form_with model: @address, url: address_index_path, method: :post do |f| %>
+
+  <div class="col-10 px-5 mx-5">
+    <table class="table table-borderless">
+      <tr>
+        <td>郵便番号(ハイフンなし)</td>
+        <td><%= f.text_field :postal_code, :size => "30" %></td>
+      </tr>
+      <tr>
+        <td>住所</td>
+        <td><%= f.text_field :address, :size => "70" %></td>
+      </tr>
+      <tr>
+        <td>宛名</td>
+        <td><%= f.text_field :name, :size => "30" %></td>
+        <td><%= f.submit '新規登録', class: "btn btn-success px-5" %></td>
+      </tr>
+    </table>
+  </div>
+
 <% end %>
 
-
-  <table>
-    <thead>
+<div class="col-8 px-5 py-5">
+  <table  class="table">
+    <thead class="table-light">
       <tr>
         <td>郵便番号</td>
         <td>住所</td>
@@ -30,25 +35,23 @@
         </td>
       </tr>
     </thead>
-
-    <% @addresses.each do |address| %>
-
+  <% @addresses.each do |address| %>
     <tbody>
       <tr>
         <td><%= address.postal_code %></td>
         <td><%= address.address %></td>
         <td><%= address.name %></td>
         <td>
-          <%= link_to edit_address_path(@address.id) do %>
+          <%= link_to edit_address_path(address) do %>
             <button class="btn btn-default">編集する</button>
           <% end %>
-          <%= link_to address_path(@address.id), method: :delete do %>
+          <%= link_to address_path(address), method: :delete do %>
             <button class="btn btn-default">削除する</button>
           <% end %>
         </td>
       </tr>
     </tbody>
-
-    <% end %>
+  <% end %>
 
   </table>
+</div>

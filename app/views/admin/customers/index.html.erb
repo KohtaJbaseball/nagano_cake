@@ -1,9 +1,10 @@
 <%= render 'admin/link' %>
 
-<h2>会員一覧</h2>
+<h2 class="col-4 py-5 px-5">会員一覧</h2>
 
-  <table>
-    <thead>
+<div class="col-8 mx-auto">
+  <table class="table table-borderless">
+    <thead class="table-light">
       <tr>
         <th>会員ID</th>
         <th>氏名</th>
@@ -12,17 +13,24 @@
       </tr>
     </thead>
 
-    <% @customers.each do |user| %>
+    <% @customers.each do |customer| %>
 
     <tbody>
       <tr>
         <td><%= customer.id %></td>
-        <td><%= customer.last_name.first_name %></td>
+        <td><%= link_to customer.full_name, admin_customer_path(customer.id) %></td>
         <td><%= customer.email %></td>
-        <td></td>
+        <td>
+          <% if customer.is_deleted? %>
+            <p class="fw-bold text-muted">退会</p>
+          <% else %>
+            <p class="fw-bold text-success">有効</p>
+          <% end %>
+        </td>
       </tr>
     </tbody>
 
     <% end %>
 
   </table>
+</div>

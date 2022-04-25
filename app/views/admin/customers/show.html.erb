@@ -1,47 +1,63 @@
 <%= render 'admin/link' %>
 
-<h2><%= @customer.last_name,first_name %>さんの会員詳細</h2>
+<h2 class="col-4 py-5 px-5"><%= @customer.full_name %>さんの会員詳細</h2>
 
-<table>
-  <tr>
-    <td>会員ID</td>
-    <td><%= @customer.id %></td>
-  </tr>
-  <tr>
-    <td>氏名</td>
-    <td><%= @customer.first_name %><%= @customer.last_name %></td>
-  </tr>
-  <tr>
-    <td>フリガナ</td>
-    <td><%= @customer.first_name_kana %><%= @customer.last_name_kana %></td>
-  </tr>
-  <tr>
-    <td>郵便番号</td>
-    <td><%= @customer.postal_code %></td>
-  </tr>
-  <tr>
-    <td>住所</td>
-    <td><%= @customer.address %></td>
-  </tr>
-  <tr>
-    <td>電話番号</td>
-    <td><%= @customer.telephone_number %></td>
-  </tr>
-  <tr>
-    <td>メールアドレス</td>
-    <td><%= @customer.email %></td>
-  </tr>
-  <tr>
-    <td>会員ステータス</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>
-      <%= link_to edit_admin_customer(@customer.id) do %>
-        <button class="btn btn-default">編集する</button>
-      <% end %>
-    </td>
-    <td></td>
-  </tr>
-</table>
+<div class="col-8 mx-auto">
+  <table class="table table-borderless">
+    <tr>
+      <td>会員ID</td>
+      <td><%= @customer.id %></td>
+    </tr>
+    <tr>
+      <td>氏名</td>
+      <td><%= @customer.last_name %>　<%= @customer.first_name %></td>
+    </tr>
+    <tr>
+      <td>フリガナ</td>
+      <td><%= @customer.last_name_kana %>　<%= @customer.first_name_kana %></td>
+    </tr>
+    <tr>
+      <td>郵便番号</td>
+      <td><%= @customer.postal_code %></td>
+    </tr>
+    <tr>
+      <td>住所</td>
+      <td><%= @customer.address %></td>
+    </tr>
+    <tr>
+      <td>電話番号</td>
+      <td><%= @customer.telephone_number %></td>
+    </tr>
+    <tr>
+      <td>メールアドレス</td>
+      <td><%= @customer.email %></td>
+    </tr>
+    <tr>
+      <td>会員ステータス</td>
+      <td>
+        <% if @customer.is_deleted? %>
+          <p class="fw-bold text-muted">退会</p>
+        <% else %>
+          <p class="fw-bold text-success">有効</p>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <div class="mt-3">
+          <div class="btn-group btn-group-lg">
+            <%= link_to edit_admin_customer_path(@customer.id) do %>
+              <button class="btn btn-success">編集する</button>
+            <% end %>
+          </div>
+          <div class="btn-group btn-group-lg mx-5">
+            <%= link_to admin_path do %>
+              <button class="btn btn-primary">注文履歴一覧を見る</button>
+            <% end %>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

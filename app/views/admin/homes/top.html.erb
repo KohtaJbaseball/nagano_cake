@@ -1,24 +1,29 @@
 <%= render 'admin/link' %>
 
-<h2>注文履歴一覧</h2>
+<h2 class="col-4 py-5 px-5">注文履歴一覧</h2>
 
-
-
-  <table>
-    <thead>
+<div class="col-8 mx-auto">
+  <table class="table table-borderless">
+    <thead class="table-light">
       <tr>
         <th>購入日時</th>
         <th>購入者</th>
         <th>注文個数</th>
       </tr>
     </thead>
-
-
+<% @orders.each do |order| %>
     <tbody>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><%= link_to order.created_at, admin_order_path(order.id) %></td>
+        <td><%= order.customer.full_name %></td>
+        <td>
+          <% sum = 0 %>
+          <% order.order_details.each do |order_detail| %>
+            <% sum += order_detail.amount %>
+          <% end %>
+          <%= sum %>
+        </td>
       </tr>
     </tbody>
+<% end %>
   </table>

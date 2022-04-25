@@ -1,26 +1,10 @@
-<header>
-  <ul>
-    <li>
-      <%= link_to "About", about_path %>
-    </li>
-    <li>
-      <%= link_to "商品一覧" %>
-    </li>
-    <li>
-      <%= link_to "新規登録", new_customer_registration %>
-    </li>
-    <li>
-      <%= link_to "ログイン", new_customer_session %>
-    </li>
-  </ul>
-</header>
+<%= render 'public/public_link' %>
 
-
-<h1>About</h1>
-  <h3>
+<h1 class="text-center py-5">About</h1>
+  <h4 class="text-center">
     ながのCAKEは全国発送可能なケーキ屋さんです。<br>
     お子様からお年寄りの方までお召し上がりいただけるよう、<br>
     様々なバリエーションをご用意しております。<br>
     また、全国へ発送可能ですので「いつ」でも「どこ」でもご注文いただけます。<br>
     ぜひご注文ください。
-  </h3>
+  </h4>

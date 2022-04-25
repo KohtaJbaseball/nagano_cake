@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg navbar-light border-bottom border-3 border-dark py-5">
+  <div class="container-fluid">
+    <a class="border border-dark border-2 navbar-brand mx-5 py-2 px-5 fs-3" href="/">ながのCAKE</a>
+    <div class="row justify-content-end">
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+        <% if customer_signed_in? %>
+          <a class="rounded border border-2 nav-link mx-4 py-2 px-3" href="/customers/my_page">マイページ</a>
+          <a class="rounded border border-2 nav-link mx-4 py-2 px-3" href="/items">商品一覧</a>
+          <a class="rounded border border-2 nav-link mx-4 py-2 px-3" href="/cart_items">カート</a>
+          <a class="rounded border border-2 nav-link mx-4 py-2 px-3" data-method="delete" href="/customers/sign_out">ログアウト</a>
+        <% else %>
+          <a class="rounded border border-2 nav-link mx-4 py-2 px-3" href="/about">About</a>
+          <a class="rounded border border-2 nav-link mx-4 py-2 px-3" href="/items">商品一覧</a>
+          <a class="rounded border border-2 nav-link mx-4 py-2 px-3" href="/customers/sign_up">新規登録</a>
+          <a class="rounded border border-2 nav-link mx-4 py-2 px-3" href="/customers/sign_in">ログイン</a>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

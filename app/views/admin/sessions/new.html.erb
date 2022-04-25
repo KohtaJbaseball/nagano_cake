@@ -1,41 +1,42 @@
-<header>
-  <ul>
-    <li>
-      <%= link_to "About" %>
-    </li>
-    <li>
-      <%= link_to "商品一覧" %>
-    </li>
-    <li>
-      <%= link_to "新規登録" %>
-    </li>
-    <li>
-      <%= link_to "ログイン" %>
-    </li>
-  </ul>
-</header>
+<nav class="navbar navbar-expand-lg navbar-light border-bottom border-3 border-dark py-5">
+  <div class="container-fluid">
+    <a class="border border-dark border-2 navbar-brand mx-5 py-2 px-5 fs-3" href="/">ながのCAKE</a>
+    <div class="row justify-content-end">
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+          <a class="rounded border border-2 nav-link mx-4 py-2 px-3" href="/about">About</a>
+          <a class="rounded border border-2 nav-link mx-4 py-2 px-3" href="/items">商品一覧</a>
+          <a class="rounded border border-2 nav-link mx-4 py-2 px-3" href="/customers/sign_up">新規登録</a>
+          <a class="rounded border border-2 nav-link mx-4 py-2 px-3" href="/customers/sign_in">ログイン</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
 
-<h2>管理者ログイン</h2>
+<h2 class="col-4 py-5 px-5">管理者ログイン</h2>
 
 
-<%= form_with model: @admin, url: admin_session_path do |f| %>
+<%= form_with model: @admin, url: admin_session_path, local: true do |f| %>
 
-  <table>
+<div class="container col-8 mx-auto">
+  <table class="table table-borderless">
     <tr class="field">
-      <td><%= f.label :メールアドレス %></td>
-      <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+      <td class="label"><%= f.label :メールアドレス %></td>
+      <td class="box"><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
     </tr>
+
     <tr class="field">
-      <td><%= f.label :パスワード %></td>
-      <td><%= f.password_field :password, autocomplete: "current-password" %></td>
+      <td class="label"><%= f.label :パスワード %></td>
+      <td class="box"><%= f.password_field :password, autocomplete: "current-password" %></td>
     </tr>
+
     <tr>
       <td></td>
-      <td class="actions">
-        <%= f.submit "ログイン" %>
-      </td>
+      <td class="box"><%= f.submit "ログイン", class:"btn btn-primary" %></td>
     </tr>
   </table>
+  </div>
 <% end %>
 
 <%= render "admin/shared/links" %>

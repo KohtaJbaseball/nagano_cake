@@ -1,14 +1,23 @@
 <%= render 'admin/link' %>
 
-<h2>ジャンル編集</h2>
+<h2 class="col-4 py-5 px-5">ジャンル編集</h2>
 
 <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
-  <table>
+
+<div class="col-6 mx-5">
+
+  <table class="table table-borderless">
     <tr>
-      <th>ジャンル名</th>
-      <td><%= f.text_field :name %></td>
-      <td><%= f.submit '変更を保存' %></td>
+      <th><%= f.label :name, "ジャンル名" %></th>
+      <td><%= f.text_field :name, :size => "40" %></td>
+      <div class="btn-group btn-group-md">
+        <td>
+          <%= f.submit '変更を保存', class: "btn btn-success px-4" %>
+        </td>
+      </div>
     </tr>
   </table>
+</div>
+
 <% end %>
 

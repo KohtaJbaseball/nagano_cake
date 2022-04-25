@@ -1,36 +1,49 @@
 <%= render 'admin/link' %>
 
-<h2>商品新規登録</h2>
+<h2 class="col-4 py-5 px-5">商品新規登録</h2>
 
-<%= form_with model: @item, url: admin_items_path do |f| %>
+<%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
 
-  <table>
+<div class="col-6 mx-auto">
+  <table class="table table-borderless">
     <tr>
       <td>商品画像</td>
       <td><%= f.file_field :image_id, accept: "image/*" %></td>
     </tr>
     <tr>
       <td>商品名</td>
-      <td><%= f.text_field :name %></td>
+      <td><%= f.text_field :name, :placeholder => "商品名", :size=>"40" %></td>
     </tr>
     <tr>
       <td>商品説明</td>
-      <td><%= f.text_area :introduction %></td>
+      <td><%= f.text_area :introduction, :placeholder => "ここに説明文を記述します", :size => "40x10" %></td>
     </tr>
     <tr>
       <td>ジャンル</td>
-      <td><%= f.select :genre_id, [['ケーキ',1],['プリン',2],['焼き菓子',3],['キャンディ',4]], { include_blank: '--選択してください--'} %></td>
+      <td>
+        <%= f.select :genre_id, [['ケーキ',1],['プリン',2],['焼き菓子',3],['キャンディ',4]], { include_blank: '--選択してください--'}, class: "form-select form-select-md" %>
+      </td>
     </tr>
     <tr>
       <td>税抜価格</td>
-      <td><%= f.text_field :price %>円</td>
+      <td><%= f.text_field :price, :size => "40" %>円</td>
     </tr>
     <tr>
       <td>販売ステータス</td>
-      <td></td>
+      <td>
+        <%= f.radio_button :is_active, :on_sale, checked: "checked" %>
+        <%= f.label :is_active, "販売中", {value: :"true", style: "display: inline-block;"} %>
+        <%= f.radio_button :is_active, :off_sale %>
+        <%= f.label :is_active, "販売停止中", {value: :"false", style: "display: inline-block;"} %>
+      </td>
     </tr>
   </table>
+</div>
 
-  <%= f.submit '新規登録' %>
+<div class="text-center mt-5">
+  <div class="btn-group btn-group-lg">
+    <%= f.submit '新規登録', class: "btn btn-success" %>
+  </div>
+</div>
 
 <% end %>

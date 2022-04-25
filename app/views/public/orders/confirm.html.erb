@@ -1,0 +1,89 @@
+<%= render 'public/public_link' %>
+
+<h2 class="col-4 py-5 px-5">注文情報確認</h2>
+
+<div class="container">
+  <div class="row justify-content-around">
+    <div class="col-7">
+      <table class="table table-bordered">
+        <thead class="table-light">
+          <tr>
+            <td>商品名</td>
+            <td>単価(税込)</td>
+            <td>数量</td>
+            <td>小計</td>
+          </tr>
+        </thead>
+      <% @cart_items.each do |cart_item| %>
+        <tbody>
+          <tr>
+            <td>
+              <% if cart_item.item.image.attached? %>
+                <%= image_tag cart_item.item.imgae, size: "55x50" %>
+              <% else %>
+                <%= image_tag 'no_image', size: "55x50" %>
+              <% end %>
+              <%= cart_item.item.name %>
+            </td>
+            <td><%= cart_item.item.with_tax_price %></td>
+            <td><%= cart_item.amount %></td>
+            <td><%= cart_item.subtotal.to_s(:delimited) %></td>
+          </tr>
+        </tbody>
+      <% end %>
+      </table>
+    </div>
+    <div class="col-3">
+      <table  class="table table-bordered">
+        <tr>
+          <td class="table-light">送料</td>
+          <td>800</td>
+        </tr>
+        <tr>
+          <td class="table-light">商品合計</td>
+          <td><%= @total.round.to_s(:delimited) %></td>
+        </tr>
+        <tr>
+          <td class="table-light">請求金額</td>
+          <td><%= @billingamount.round.to_s(:delimited) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row justify-content-start py-3">
+    <div class="col-2">
+      <h4 class="text-end">支払方法</h4>
+    </div>
+    <div class="col-3">
+      <p><%= @order.payment_method_i18n %></p>
+    </div>
+  </div>
+
+  <div class="row justify-content-start py-3">
+    <div class="col-2">
+      <h4 class="text-end">お届け先</h4>
+    </div>
+    <div class="col">
+      <p>
+        〒<%= current_customer.postal_code %>
+        <%= current_customer.address %><br>
+        <%= current_customer.last_name %><%= current_customer.first_name %>
+      </p>
+    </div>
+  </div>
+
+<%= form_with model: @order, url: orders_path, method: :post do |f| %>
+  <div class="row justify-content-center py-5">
+    <div class="col-4 text-center">
+      <%= f.hidden_field :name %>
+      <%= f.hidden_field :postal_code %>
+      <%= f.hidden_field :address %>
+      <%= f.hidden_field :total_payment, value: @billingamount %>
+      <%= f.hidden_field :payment_method %>
+      <%= f.submit "注文を確定する", class: "btn btn-success btn-lg" %>
+    </div>
+  </div>
+<% end %>
+</div>
+

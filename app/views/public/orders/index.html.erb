@@ -1,0 +1,44 @@
+<%= render 'public/public_link' %>
+
+<h2 class="col-4 py-5 px-5">注文履歴一覧</h2>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th>注文日</th>
+            <th>配送先</th>
+            <th>注文商品</th>
+            <th>支払金額</th>
+            <th>注文詳細</th>
+          </tr>
+        </thead>
+      <% @orders.each do |order| %>
+        <tbody>
+          <tr>
+            <td><%= order.created_at %></td>
+            <td>
+              〒<%= order.customer.postal_code %><br>
+              <%= order.customer.address %><br>
+              <%= order.customer.last_name %><%= order.customer.first_name %>
+            </td>
+            <td>
+              <% order.order_details.each do |order_detail| %>
+                <%= order_detail.item.name %>
+              <% end %>
+            </td>
+            <td><%= order.total_payment %>円</td>
+            <td>
+              <%= link_to order_path(order.id) do %>
+                <button class="btn btn-primary">表示する</button>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      <% end %>
+      </table>
+    </div>
+  </div>
+</div>

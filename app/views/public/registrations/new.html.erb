@@ -1,40 +1,44 @@
-<header>
-  <ul>
-    <li>
-      <%= link_to "About", about_path %>
-    </li>
-    <li>
-      <%= link_to "商品一覧" %>
-    </li>
-    <li>
-      <%= link_to "新規登録", new_customer_registration_path %>
-    </li>
-    <li>
-      <%= link_to "ログイン", new_customer_session_path %>
-    </li>
-  </ul>
-</header>
+<%= render 'public/public_link' %>
 
 
-<h2>新規登録</h2>
+<h2 class="col-4 py-5 px-5">新規登録</h2>
 
-<%= form_with model: @customer, url: customer_registration_path do |f| %>
+<%= form_with model: @customer, url: customer_registration_path, local: true do |f| %>
   <%= render "public/shared/error_messages", resource: resource %>
 
-  <table>
+<div class="container col-8 mx-auto">
+  <table class="table table-borderless">
     <tr>
-      <td>名前</td>
-      <td>(姓)<%= f.text_field :last_name %></td>
-      <td>(名)<%= f.text_field :first_name_name %></td>
+      <td>
+        <div class="row justify-content-between">
+          <div class="col">名前</div>
+          <div class="col text-end">（姓）　</div>
+        </div>
+      </td>
+      <td>
+        <div class="row justify-content-around">
+          <div class="col"><%= f.text_field :last_name %></div>
+          <div class="col">（名）　<%= f.text_field :first_name %></div>
+        </div>
+      </td>
     </tr>
     <tr>
-      <td>フリガナ</td>
-      <td>(セイ)<%= f.text_field :last_name_kana %></td>
-      <td>(メイ)<%= f.text_field :first_name_kana %></td>
+      <td>
+        <div class="row justify-content-between">
+          <div class="col">フリガナ</div>
+          <div class="col text-end">（セイ）</div>
+        </div>
+      </td>
+      <td>
+        <div class="row justify-content-around">
+          <div class="col"><%= f.text_field :last_name_kana %></div>
+          <div class="col">（メイ）<%= f.text_field :first_name_kana %></div>
+        </div>
+      </td>
     </tr>
     <tr>
       <td>メールアドレス</td>
-      <td><%= f.email_field :email, autofocus: true, autocomplete: "email" %></td>
+      <td><%= f.text_field :email, autofocus: true, autocomplete: "email" %></td>
     </tr>
     <tr>
       <td>郵便番号(ハイフンなし)</td>
@@ -42,7 +46,7 @@
     </tr>
     <tr>
       <td>住所</td>
-      <td><%= f.text_field :address %></td>
+      <td><%= f.text_field :address, :size => "71" %></td>
     </tr>
     <tr>
       <td>電話番号(ハイフンなし)</td>
@@ -61,11 +65,17 @@
     </tr>
     <tr>
       <td></td>
-      <td><%= f.submit "新規登録" %></td>
+      <td>
+        <div class="btn-group btn-group-lg">
+          <%= f.submit "新規登録", class: "btn btn-success px-5" %>
+        </div>
+      </td>
     </tr>
   </table>
 
-  <h2>既に登録済みの方</h2>
-    <%= link_to "こちら", new_customer_session_path %>からログインしてください。
+
+
+<h2 class="col-4 pt-5">既に登録済みの方</h2>
+  <%= link_to "こちら", new_customer_session_path %>からログインしてください。
 
 <% end %>
