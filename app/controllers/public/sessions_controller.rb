@@ -24,16 +24,16 @@ class Public::SessionsController < Devise::SessionsController
 
   protected
 
-  def customer_state
-   @customer = Customer.find_by(email: params[:customer][:email])
-   return if !@customer
-   if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == false)
-    redirect_to new_customer_registration_path, notice: 'ログインできません。新規登録を行ってください。'
-   else
-    @customer = Customer.new(customer_params)
-    @customer.save
-   end
-  end
+  #def customer_state
+   #@customer = Customer.find_by(email: params[:customer][:email])
+   #return if !@customer
+   #if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == false)
+    #redirect_to new_customer_registration_path, notice: 'ログインできません。新規登録を行ってください。'
+   #else
+    #@customer = Customer.new(customer_params)
+    #@customer.save
+   #end
+  #end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_in_params

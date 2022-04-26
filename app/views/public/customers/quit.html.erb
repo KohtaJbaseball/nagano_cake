@@ -15,9 +15,7 @@
           <button class="btn btn-primary mx-3 px-5">退会しない</button>
         <% end %>
 
-        <%= link_to customers_out_path, method: :patch, data: { confilm: "本当に退会しますか？" } do %>
-          <button class="btn btn-danger mx-3 px-5">退会する</button>
-        <% end %>
+        <%= link_to "退会する", customers_out_path, method: :patch, class: "btn btn-danger mx-3 px-5", data: { confirm: "本当に退会しますか？" } %>
       </div>
 
     </div>
